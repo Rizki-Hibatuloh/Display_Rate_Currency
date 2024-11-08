@@ -1,33 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react';
+
+const API_KEY = "a78b827a01b8419c8a4bb4d5cc3219ae";
+const API_URL = `https://api.currencyfreaks.com/v2.0/rates/latest?apikey=${API_KEY}`;
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const fetchCurrencyData = async () => {
+    try{
+      const res = await fetch(API_URL);
+
+      if(!res.ok) {
+        const response = await res.json()
+        throw response;
+      }
+      const result = await res.json();
+      console.log(result);
+      
+    } 
+    catch (error) {
+      console.error("[fetchCurrencyData] : ", error);
+    }
+  }
+ 
+useEffect (() => {
+  fetchCurrencyData();
+}, []);
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <main className='flex min-h-screen bg-orange-500 justify-center items-center'>
+        <section className='flex w-2/4 justify-around text-center items-center'>
+          <div className="w-1/2">
+            <h1 className="mb-2.5 text-white">{"Currency"}</h1>
+            <div>
+              <p className="mb-1.5 text-white">1000</p>
+            </div>
+          </div>
+          <div className="w-1/2">
+            <h1 className="mb-2.5 text-white">{"Currency"}</h1>
+            <div>
+              <p className="mb-1.5 text-white">1000</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
     </>
   )
 }
