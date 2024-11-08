@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const API_KEY = "dc826d39132d4d95a932981db3dc8a70";
+const API_KEY = "39afb466e702420cb79ea36d54084189";
 const API_URL = `https://api.currencyfreaks.com/v2.0/rates/latest?apikey=${API_KEY}`;
 
 
@@ -115,6 +115,10 @@ useEffect (() => {
           })
         }
         </section>
+        <p className="text-gray-300 absolute bottom-2 text-center">
+          Rates are based on 1 USD.<br />
+          This application uses API from https://currencyfreaks.com.
+        </p>
       </main>
 
     </>
